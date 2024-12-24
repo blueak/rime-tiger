@@ -4,10 +4,6 @@
  
  
 ########################
-# 整句词库选择，只能选一个 #
-########################
- 
-########################
 # 反查方案选择，只能选一个 #
 ########################
 pinyin:
@@ -221,7 +217,6 @@ keys:
       - { when: always, accept: "Control+u", toggle: extended_char }         # 字集滤镜
       - { when: always, accept: "Control+o", toggle: traditionalization }    # 简繁滤镜
       - { when: always, accept: "Control+i", toggle: emoji }                 # Emoji开关
-      - { when: always, accept: "Control+semicolon", toggle: chinese_english }       # 翻译
       - { when: always, accept: "Control+m", toggle: mars }                  # 火星文开关
 
 dict_All_false:
@@ -236,26 +231,7 @@ fast_symbol_translator:
   fast_symbol:
     dictionary: fast_symbol
     __include: dict_All_false
-
-easy_en_translator:
-  easy_en:
-    dictionary: easy_en
-    tag: easy_en
-    split_sentence: true
-    prefix: "'"
-    tips: "〔英文〕"
-    enable_sentence: true
-    enable_encoder: false
-    encode_commit_history: false
-    enable_completion: true
-    enable_user_dict: false
-    preedit_format:
-      - xlit|_| |
-    comment_format:
-      - xlit|_| |
-
  
-
  
 
  
@@ -273,18 +249,7 @@ reverse_lookup_translator_xh:
       - xform|0||
       - xform|[[]||
 
-radical_flypy_translator:
-  radical_flypy:
-    dictionary: radical_flypy
-    tag: radical_flypy
-    prefix: "R"
-    tips: "〔鹤音拆字〕"
-    enable_user_dict: false
-    enable_charset_filter: false
-    enable_encoder: false
-    enable_sentence: false
-    encode_commit_history: false
-    enable_completion: true
+ 
 
 s2t_filter:
   s2t:
