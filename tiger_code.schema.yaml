@@ -11,14 +11,9 @@ schema:
     - fast_symbol
     - tiger_spelling_pseudo
     - radical_flypy
-    - easy_en
-    - japanese
-    - tiger_codes
-    - tiger_oni
-    - tiger_phrase
   description: |
     虎码单字
-  name: "🐯字·官方"
+  name: "单字"
   schema_id: tiger_code
   version: "2024-10-31"
 
@@ -28,13 +23,6 @@ __patch:
 
 __include: tiger:/switches_engine_table        # Rime模块
 __include: tiger:/fast_symbol_translator       # 快符
-__include: tiger:/easy_en_translator           # 英文
-__include: tiger:/japanese_translator          # 日文
-__include: tiger:/radical_flypy_translator     # 部件拆字
-__include: tiger:/tiger_codes_translator       # 官方虎词
-__include: tiger:/tiger_oni_translator         # 九重鬼虎
-__include: tiger:/tiger_phrase_translator      # 赫兹虎单整句
-__include: tiger:/tiger_phrases_translator     # 官方虎词整句
 __include: tiger:/reverse_lookup_translator_xh # 小鹤反查
 __include: tiger:/s2t_filter                   # 简繁滤镜
 __include: tiger:/history_filter               # z 键历史

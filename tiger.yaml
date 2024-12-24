@@ -1,57 +1,20 @@
 # tiger-code config
 # encoding: utf-8
 # CC-BY-4.0
-
-########################
-#        模型配置       #
-########################
-
-octagram:
-  disable:
-    __patch:
-      grammar: {}
-  enable_for_chars: #参数较极端，仅适用于虎单整句方案，音码方案不建议尝试
-    __patch:
-      grammar:
-        language: amz-v1-5-zh-hans
-        collocation_max_length: 6
-        collocation_min_length: 4
-        collocation_penalty: -15
-        non_collocation_penalty: -2
-        weak_collocation_penalty: -23
-        rear_penalty: -18
-      translator/+:
-        contextual_suggestions: true
-        max_homophones: 4
-        max_homographs: 0
-
-  enable_for_words: #用于词句的参数，未定
-    __patch:
-      grammar:
-        language: amz-v3n2m1-zh-hans
-      translator/+:
-        contextual_suggestions: true
-        max_homophones: 7
-        max_homographs: 7
-
+ 
+ 
 ########################
 # 整句词库选择，只能选一个 #
 ########################
-dicts:
-  __patch:
-    dictionary: tiger_phrase_hertz       # 赫兹词库，这是基于万象词库调整词频以适应虎码字频
-    #dictionary: tiger_phrase_ice        # 雾凇词库
-    #dictionary: tiger_phrase_wanxiang   # 万象词库
-    #dictionary: tiger_phrase_moran      # 魔然词库
-
+ 
 ########################
 # 反查方案选择，只能选一个 #
 ########################
 pinyin:
   __patch:
-    - algebra_py        # 全拼
+   # - algebra_py        # 全拼
     #- algebra_zrm      # 自然码双拼
-    #- algebra_flypy    # 小鹤双拼
+    - algebra_flypy    # 小鹤双拼
     #- algebra_sogou    # 搜狗双拼
     #- algebra_mspy     # 微软双拼
     #- algebra_abc      # 智能ABC双拼
@@ -152,13 +115,6 @@ switches_engine_table:
     segmentors:
       - ascii_segmentor
       - matcher
-      - affix_segmentor@easy_en                     # 英文
-      - affix_segmentor@japanese                    # 日文
-      - affix_segmentor@radical_flypy               # 部件拆字
-      - affix_segmentor@tiger_codes                 # 官方虎词
-      - affix_segmentor@tiger_oni                   # 九重鬼虎
-      - affix_segmentor@tiger_phrase                # 赫兹虎单整句
-      - affix_segmentor@tiger_phrases               # 官方虎词整句
       - abc_segmentor                               # 标记输入码的类型
       - punct_segmentor                             # 割界，与前后方的其他编码区分开
       - fallback_segmentor
@@ -166,20 +122,10 @@ switches_engine_table:
       - predict_translator
       - punct_translator                            # 转换标点符号
       - reverse_lookup_translator                   # 拼音反查
-      - script_translator@japanese                  # 日文
       - table_translator                            # 码表转换
-      - table_translator@easy_en                    # 英文
-      - table_translator@radical_flypy              # 部件拆字
-      - table_translator@tiger_codes                # 官方虎词
-      - table_translator@tiger_oni                  # 九重鬼虎
       - table_translator@fast_symbol                # 码表转换-快符
-      - script_translator@tiger_phrase              # 赫兹虎单整句
-      - script_translator@tiger_phrases             # 官方虎词整句
       - history_translator@input_history            # 输入历史
-      - lua_translator@*hertz.calculator_translator # 计算器
       - lua_translator@*hertz.time_translator       # 时间
-      - lua_translator@*hertz.lunar_translator      # 农历
-      - lua_translator@*hertz.number_translator     # 数字
       - lua_translator@*hertz.tiger_pin*panacea_translator
     filters:
       - lua_filter@*hertz.charset_filter            # 字集过滤
@@ -214,13 +160,6 @@ switches_engine_script:
     segmentors:
       - ascii_segmentor
       - matcher
-      - affix_segmentor@easy_en                     # 英文
-      - affix_segmentor@japanese                    # 日文
-      - affix_segmentor@radical_flypy               # 部件拆字
-      - affix_segmentor@tiger_codes                 # 官方虎词
-      - affix_segmentor@tiger_oni                   # 九重鬼虎
-      - affix_segmentor@tiger_phrase                # 赫兹虎单整句
-      - affix_segmentor@tiger_phrases               # 官方虎词整句
       - abc_segmentor                               # 标记输入码的类型
       - punct_segmentor                             # 割界，与前后方的其他编码区分开
       - fallback_segmentor
@@ -228,20 +167,10 @@ switches_engine_script:
       - predict_translator
       - punct_translator                            # 转换标点符号
       - reverse_lookup_translator                   # 拼音反查
-      - script_translator@japanese                  # 日文
-      - table_translator@easy_en                    # 英文
-      - table_translator@radical_flypy              # 部件拆字
-      - table_translator@tiger_codes                # 官方虎词
-      - table_translator@tiger_oni                  # 九重鬼虎
       - table_translator@fast_symbol                # 码表转换-快符
-      - script_translator@tiger_phrase              # 赫兹虎单整句
-      - script_translator@tiger_phrases             # 官方虎词整句
       - script_translator                           # 码表转换
       - history_translator@input_history            # 输入历史
-      - lua_translator@*hertz.calculator_translator # 计算器
       - lua_translator@*hertz.time_translator       # 时间
-      - lua_translator@*hertz.lunar_translator      # 农历
-      - lua_translator@*hertz.number_translator     # 数字
       - lua_translator@*hertz.tiger_pin*panacea_translator
     filters:
       - lua_filter@*hertz.charset_filter            # 字集过滤
@@ -325,68 +254,11 @@ easy_en_translator:
     comment_format:
       - xlit|_| |
 
-japanese_translator:
-  japanese:
-    dictionary: japanese
-    tag: japanese
-    prefix: "J"
-    tips: "〔日本語ローマ字〕"
-    __include: dict_All_false
+ 
 
-tiger_codes_translator:
-  tiger_codes:
-    dictionary: tiger_codes
-    tag: tiger_codes
-    prefix: "D"
-    tips: "〔官方虎词〕"
-    __include: dict_All_false
+ 
 
-tiger_oni_translator:
-  tiger_oni:
-    dictionary: tiger_oni
-    tag: tiger_oni
-    prefix: "G"
-    tips: "〔九重鬼虎〕"
-    __include: dict_All_false
-
-tiger_phrase_translator:
-  tiger_phrase:
-    __include: dicts
-    tag: tiger_phrase
-    prefix: "H"
-    tips: "〔赫兹虎单整句〕"
-    __include: dict_All_false
-    preedit_format:
-      # 手动分词标记
-      - xform/([a-z]{4})[P']/$1⁴/
-      - xform/([a-z]{3})[O']/$1³/
-      - xform/([a-z]{2})[I']/$1²/
-      - xform/([a-z]{1})[U']/$1¹/
-      # 自动分词标记
-      - xform/([a-z]{1,4})[_]/$1␣/
-      # 其余处理
-      - xform/([¹²³⁴][a-z]+)[_']/$1/
-      - xform/([¹²³⁴])_/$1/
-
-tiger_phrases_translator:
-  tiger_phrases:
-    dictionary: tiger_phrases
-    tag: tiger_phrases
-    prefix: "F"
-    tips: "〔官方虎词整句〕"
-    __include: dict_All_false
-    preedit_format:
-      # 手动分词标记
-      - xform/([a-z]{4})[P']/$1⁴/
-      - xform/([a-z]{3})[O']/$1³/
-      - xform/([a-z]{2})[I']/$1²/
-      - xform/([a-z]{1})[U']/$1¹/
-      # 自动分词标记
-      - xform/([a-z]{1,4})[_]/$1␣/
-      # 其余处理
-      - xform/([¹²³⁴][a-z]+)[_']/$1/
-      - xform/([¹²³⁴])_/$1/
-
+ 
 reverse_lookup_translator_xh:
   reverse_lookup:
     dictionary: pinyin
@@ -468,35 +340,7 @@ rec:
       tiger_phrases: "^F[a-zA-Z]*`?$"
       reverse_lookup: "^`[a-z]*'?$"
       calculator: "^=.*$"
-
-hertz:
-  predictor:
-    db: predict.db
-    max_candidates: 999
-    max_iterations: 999
-  tiger:
-    # 「置頂」功能相關設置
-    # 輸入時通過快捷鍵 Ctrl+t 可以將高亮顯示的候選置頂，被置頂的候選位置固定，不再參與調頻
-    # 對同一輸入碼最高支持8個置頂詞，當嘗試置頂第9個詞時，最早被置頂的詞將會失效
-    pin:
-      # 「置頂」功能開關
-      enable: true
-      # 置頂詞提示符
-      indicator: "📌"
-      # 「萬靈藥」加詞功能
-      # 通過輸入 「編碼A」@「編碼B」 實現造詞功能，編碼A是這個新詞的新編碼 編碼B是目前可以打出該詞的編碼
-      # 例如 輸入 tnfb 不能得到「頭腦風暴」這一候選， 此時我們可以輸入 tnfb@tbnkfgbk 按下空格 讓「頭腦風暴」候選上屏，上屏的詞會被加入用戶詞庫中，之後我們可以用 tnfb 來得到「頭腦風暴」這一候選了
-      # 造出的詞與置頂詞是等同的
-      panacea:
-        # 加詞狀態提示
-        prompt: "〔加词〕"
-        # 加詞中綴引導符
-        infix: "@"
-        # 自由加詞模式開關，開啓此模式後，輸入「編碼A」@並空格上屏後會進入加詞狀態，此時可以連續地、不受束縛地輸入，再次按下x@空格退出加詞狀態，期間輸入的內容將會被記錄爲「編碼A」的新置頂詞
-        # 此模式適合造一些混合詞，如「A4紙」、「KOS-MOS」等
-        freestyle: true
-
-switches_list:
+ 
   - name: ascii_mode
     reset: 0
     states: [ 中, 英 ]
@@ -897,14 +741,7 @@ punctuator:
     '/bqfw': [ '🏠', '🏡', '🏢', '🏣', '🏤', '🏥', '🏦', '🏨', '🏩', '🏪', '🏫', '🏬', '🏭', '🏯', '🏰', '💒', '🗼', '🗽', '⛪']
     '/bqjj': ['🛎', '🚪', '🛌', '🛏', '🛋', '🚽', '🚿', '🛀', '🛁']
     '/bqsjt': ['⌛', '⏳', '⌚', '⏰', '⏲', '🕰', '🕛', '🕧', '🕐', '🕜', '🕑', '🕝', '🕒', '🕞', '🕓', '🕟', '🕔', '🕠', '🕕', '🕡', '🕖', '🕢', '🕗', '🕣', '🕘', '🕤', '🕙', '🕥', '🕚', '🕦', '🌑']
-    '/bqzr': ['🌍', '🌎', '🌏', '🌐', '🗺', '🗾', '🏔', '⛰', '🌋', '🗻', '🏕', '🏖', '🏜', '🏝', '🏞', '🏟', '🏛', '🏗', '🏘', '🏙', '🏚','🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘', '🌙', '🌚', '🌛', '🌜', '🌡', '☀', '🌝', '🌞', '⭐', '🌟', '🌠', '☁', '⛅', '⛈', '🌤', '🌥', '🌦', '🌧', '🌨', '🌩', '🌪', '🌫', '🌬', '🌀', '🌈', '🌂', '☂', '☔', '⛱', '⚡', '❄', '☃', '⛄', '⛲', '⛺', '🌁', '🌃', '🌄', '🌅', '🌆', '🌇', '🌉', '♨', '🌌']
-    '/kh': ['(', ')', '[', ']', '{', '}']
-    '/tiger':
-      - 'https://tiger-code.com/guide'
-      - 'https://tiger-code.com/'
-    '/hz':
-      - 'https://github.com/rimeinn/rime-tiger.git'
-      - 'https://hertz-hwang.github.io/hamster-tools/'
+ 
 
 algebra_py:
   __append:
